@@ -82,11 +82,8 @@
         function viewNotes() {
             if (notes == false) {
                 notes = true;
-                document.getElementById('notest').innerText = "hello"
-                document.getElementById('viewNotesB').innerText = "Hide notes"
-            } else {
-                notes = false;
-                document.getElementById('notest').innerText = `MATTER
+                document.getElementById('notest').innerText = `
+                MATTER
 Matter is anything that takes up space and has mass. Matter is all around us and everything is made of matter.
 
 Types of matter
@@ -215,6 +212,10 @@ Quantitative properties - refers to the measurements/specific amounts.
 
 
                 `
+                document.getElementById('viewNotesB').innerText = "Hide notes"
+            } else {
+                notes = false;
+                document.getElementById('notest').innerText = ''
                 document.getElementById('viewNotesB').innerText = "View notes"
             }    
         }    
