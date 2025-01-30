@@ -12,9 +12,81 @@
 </head>
 <body>
     <center>
-        <h1>Notes</h1>
-        <p>
-            MATTER
+       <button class="btn btn-primary mt-3" id="viewNotesB" onclick="viewNotes()">View Notes</button>
+       <p id="notest"></p>
+    </center>
+
+    <div class="container mt-5 quiz-container">
+        <h1 class="text-center">Matter and Chemistry Quiz</h1>
+        <div id="quiz"></div>
+        <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
+        <h3 class="mt-3" id="result"></h3>
+    </div>
+
+    <script>
+        let notes = false;
+        const questions = [
+            { q: "What is matter?", a: ["Anything that takes up space and has mass", "A type of energy", "A type of gas", "A form of liquid"], correct: 0 },
+            { q: "Which state of matter has a fixed shape and volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 0 },
+            { q: "Which state of matter has no fixed shape but a fixed volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1 },
+            { q: "Which state of matter has neither a fixed shape nor volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 2 },
+            { q: "In which state do particles move the fastest?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 2 },
+            { q: "Which is NOT a property of solids?", a: ["Fixed shape", "Fixed volume", "Particles far apart", "Particles vibrate in place"], correct: 2 },
+            { q: "What does the 'T' in TEAM HI stand for?", a: ["Tiny", "Tough", "Thick", "Transparent"], correct: 0 },
+            { q: "What does the 'E' in TEAM HI stand for?", a: ["Energy", "Empty spaces", "Electrons", "Evaporation"], correct: 1 },
+            { q: "What does the 'A' in TEAM HI stand for?", a: ["Attracted", "Active", "Absorbed", "Air"], correct: 0 },
+            { q: "What does the 'M' in TEAM HI stand for?", a: ["Molecules", "Mass", "Moving", "Melting"], correct: 2 },
+            { q: "What does the 'H' in TEAM HI stand for?", a: ["Heat", "Humidity", "Hollow", "Hardness"], correct: 0 },
+            { q: "What does the 'I' in TEAM HI stand for?", a: ["Identical", "Inertia", "Indivisible", "Ice"], correct: 0 },
+            { q: "What is an example of a pure substance?", a: ["Salad", "Pudding", "Distilled water", "Ketchup"], correct: 2 },
+            { q: "What is an example of a mixture?", a: ["Oxygen", "Salt", "Tea", "Sugar"], correct: 2 },
+            { q: "Which mixture has particles that can be seen?", a: ["Solution", "Homogeneous", "Heterogeneous", "Distilled water"], correct: 2 },
+            { q: "Which mixture looks like a pure substance?", a: ["Heterogeneous", "Mechanical", "Solution", "Rocks"], correct: 2 },
+            { q: "Which method is used to separate a solid from a liquid?", a: ["Filtration", "Distillation", "Sifting", "Magnetism"], correct: 0 },
+            { q: "Which method is used to separate a solvent from a solution?", a: ["Filtration", "Distillation", "Sifting", "Magnetism"], correct: 1 },
+            { q: "What is an example of evaporation?", a: ["Pasta in a strainer", "Boiling water to make clean water", "Puddles disappearing", "Sorting toys"], correct: 2 },
+            { q: "Which separation method uses a magnet?", a: ["Filtration", "Distillation", "Magnetism", "Sifting"], correct: 2 },
+            { q: "What is an example of flotation and settling?", a: ["Leaves on a pool", "Sorting different toys", "Making tea", "Melting ice"], correct: 0 },
+            { q: "What is an example of a solute?", a: ["Water in lemonade", "Sugar in lemonade", "Ice in water", "Milk in coffee"], correct: 1 },
+            { q: "What is an example of a solvent?", a: ["Salt in water", "Water in lemonade", "Sugar in coffee", "Tea leaves in tea"], correct: 1 },
+            { q: "What is the universal solvent?", a: ["Oil", "Alcohol", "Water", "Vinegar"], correct: 2 },
+            { q: "What is an example of an insoluble substance?", a: ["Salt in water", "Sugar in coffee", "Sand in water", "Lemon juice in lemonade"], correct: 2 },
+            { q: "Is apple juice a pure substance?", a: ["Yes", "No"], correct: 1 },
+            { q: "Is tap water a pure substance?", a: ["Yes", "No"], correct: 1 },
+            { q: "What is the study of matter and its changes called?", a: ["Biology", "Physics", "Chemistry", "Geology"], correct: 2 }
+        ];
+
+        function loadQuiz() {
+            let quizHTML = "";
+            questions.forEach((q, i) => {
+                quizHTML += `<div class='mb-3'><strong>${i + 1}. ${q.q}</strong><br>`;
+                q.a.forEach((answer, j) => {
+                    quizHTML += `<input type='radio' name='q${i}' value='${j}'> ${answer}<br>`;
+                });
+                quizHTML += "</div>";
+            });
+            document.getElementById("quiz").innerHTML = quizHTML;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            questions.forEach((q, i) => {
+                let selected = document.querySelector(`input[name='q${i}']:checked`);
+                if (selected && parseInt(selected.value) === q.correct) {
+                    score++;
+                }
+            });
+            document.getElementById("result").innerText = `You scored ${score} out of ${questions.length}`;
+        }
+
+        function viewNotes() {
+            if (notes == false) {
+                notes = true;
+                document.getElementById('notest').innerText = "hello"
+                document.getElementById('viewNotesB').innerText = "Hide notes"
+            } else {
+                notes = false;
+                document.getElementById('notest').innerText = `MATTER
 Matter is anything that takes up space and has mass. Matter is all around us and everything is made of matter.
 
 Types of matter
@@ -142,71 +214,10 @@ Quantitative properties - refers to the measurements/specific amounts.
 
 
 
-        </p>
-        <h1>Test</h1>
-    </center>
-
-    <div class="container mt-5 quiz-container">
-        <h1 class="text-center">Matter and Chemistry Quiz</h1>
-        <div id="quiz"></div>
-        <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
-        <h3 class="mt-3" id="result"></h3>
-    </div>
-
-    <script>
-        const questions = [
-            { q: "What is matter?", a: ["Anything that takes up space and has mass", "A type of energy", "A type of gas", "A form of liquid"], correct: 0 },
-            { q: "Which state of matter has a fixed shape and volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 0 },
-            { q: "Which state of matter has no fixed shape but a fixed volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1 },
-            { q: "Which state of matter has neither a fixed shape nor volume?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 2 },
-            { q: "In which state do particles move the fastest?", a: ["Solid", "Liquid", "Gas", "Plasma"], correct: 2 },
-            { q: "Which is NOT a property of solids?", a: ["Fixed shape", "Fixed volume", "Particles far apart", "Particles vibrate in place"], correct: 2 },
-            { q: "What does the 'T' in TEAM HI stand for?", a: ["Tiny", "Tough", "Thick", "Transparent"], correct: 0 },
-            { q: "What does the 'E' in TEAM HI stand for?", a: ["Energy", "Empty spaces", "Electrons", "Evaporation"], correct: 1 },
-            { q: "What does the 'A' in TEAM HI stand for?", a: ["Attracted", "Active", "Absorbed", "Air"], correct: 0 },
-            { q: "What does the 'M' in TEAM HI stand for?", a: ["Molecules", "Mass", "Moving", "Melting"], correct: 2 },
-            { q: "What does the 'H' in TEAM HI stand for?", a: ["Heat", "Humidity", "Hollow", "Hardness"], correct: 0 },
-            { q: "What does the 'I' in TEAM HI stand for?", a: ["Identical", "Inertia", "Indivisible", "Ice"], correct: 0 },
-            { q: "What is an example of a pure substance?", a: ["Salad", "Pudding", "Distilled water", "Ketchup"], correct: 2 },
-            { q: "What is an example of a mixture?", a: ["Oxygen", "Salt", "Tea", "Sugar"], correct: 2 },
-            { q: "Which mixture has particles that can be seen?", a: ["Solution", "Homogeneous", "Heterogeneous", "Distilled water"], correct: 2 },
-            { q: "Which mixture looks like a pure substance?", a: ["Heterogeneous", "Mechanical", "Solution", "Rocks"], correct: 2 },
-            { q: "Which method is used to separate a solid from a liquid?", a: ["Filtration", "Distillation", "Sifting", "Magnetism"], correct: 0 },
-            { q: "Which method is used to separate a solvent from a solution?", a: ["Filtration", "Distillation", "Sifting", "Magnetism"], correct: 1 },
-            { q: "What is an example of evaporation?", a: ["Pasta in a strainer", "Boiling water to make clean water", "Puddles disappearing", "Sorting toys"], correct: 2 },
-            { q: "Which separation method uses a magnet?", a: ["Filtration", "Distillation", "Magnetism", "Sifting"], correct: 2 },
-            { q: "What is an example of flotation and settling?", a: ["Leaves on a pool", "Sorting different toys", "Making tea", "Melting ice"], correct: 0 },
-            { q: "What is an example of a solute?", a: ["Water in lemonade", "Sugar in lemonade", "Ice in water", "Milk in coffee"], correct: 1 },
-            { q: "What is an example of a solvent?", a: ["Salt in water", "Water in lemonade", "Sugar in coffee", "Tea leaves in tea"], correct: 1 },
-            { q: "What is the universal solvent?", a: ["Oil", "Alcohol", "Water", "Vinegar"], correct: 2 },
-            { q: "What is an example of an insoluble substance?", a: ["Salt in water", "Sugar in coffee", "Sand in water", "Lemon juice in lemonade"], correct: 2 },
-            { q: "Is apple juice a pure substance?", a: ["Yes", "No"], correct: 1 },
-            { q: "Is tap water a pure substance?", a: ["Yes", "No"], correct: 1 },
-            { q: "What is the study of matter and its changes called?", a: ["Biology", "Physics", "Chemistry", "Geology"], correct: 2 }
-        ];
-
-        function loadQuiz() {
-            let quizHTML = "";
-            questions.forEach((q, i) => {
-                quizHTML += `<div class='mb-3'><strong>${i + 1}. ${q.q}</strong><br>`;
-                q.a.forEach((answer, j) => {
-                    quizHTML += `<input type='radio' name='q${i}' value='${j}'> ${answer}<br>`;
-                });
-                quizHTML += "</div>";
-            });
-            document.getElementById("quiz").innerHTML = quizHTML;
-        }
-
-        function submitQuiz() {
-            let score = 0;
-            questions.forEach((q, i) => {
-                let selected = document.querySelector(`input[name='q${i}']:checked`);
-                if (selected && parseInt(selected.value) === q.correct) {
-                    score++;
-                }
-            });
-            document.getElementById("result").innerText = `You scored ${score} out of ${questions.length}`;
-        }
+                `
+                document.getElementById('viewNotesB').innerText = "View notes"
+            }    
+        }    
 
         loadQuiz();
     </script>
